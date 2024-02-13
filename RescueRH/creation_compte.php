@@ -37,9 +37,9 @@ require_once('include/head.php');
             <br>
             <div class="form-group">
             <label for="formGroupExampleInput">Statut</label>
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select" id="statut" name="statut" aria-label="Default select example">
                 <option selected>Sélectionnez</option>
-                <option value="1">Salarié</option>
+                <option value="1">Salarie</option>
                 <option value="2">Alternant</option>
                 <option value="3">Stagiaire</option>
                 <option value="3">Administrateur</option>

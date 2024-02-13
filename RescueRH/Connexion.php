@@ -43,6 +43,9 @@ require_once('include/head.php');
                 <br>
 
                 <button type="submit" class="btn btn-primary">Me connecter</button>
+                <br>
+                <br>
+                <button type="submit" class="btn btn-secondary">Créer son compte</button>
             </form>
         </div>
         <?php
