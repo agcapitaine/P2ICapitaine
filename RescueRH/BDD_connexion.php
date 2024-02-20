@@ -72,6 +72,9 @@ $BDD = openDB();
                         <form class="" action="Creation_compte.php" method="post">
                             <input type="submit" name="connexion" class="btn btn-primary" value="Créer un compte">
                         </form>
+                        <form class="" action="Connexion.php" method="post">
+                            <input type="submit" name="connexion" class="btn btn-primary" value="Se connecter">
+                        </form>
                     </div>
                 </div>
             </main>
