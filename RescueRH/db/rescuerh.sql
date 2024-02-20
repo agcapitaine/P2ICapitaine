@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 12 fév. 2024 à 16:37
+-- Généré le : mar. 20 fév. 2024 à 16:07
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -67,10 +67,29 @@ CREATE TABLE `evenement` (
 
 CREATE TABLE `heuresprevues` (
   `idHeure` int(11) NOT NULL,
-  `mois` enum('janvier','fevrier','mars','avril','mai','juin','juillet','aout','septembre','octobre','novembre','decembre') NOT NULL,
+  `mois` int(11) NOT NULL,
   `annee` year(4) NOT NULL,
-  `heurePrevues` time NOT NULL
+  `heuresPrevues` time NOT NULL,
+  `nbJoursAnnualisation` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `heuresprevues`
+--
+
+INSERT INTO `heuresprevues` (`idHeure`, `mois`, `annee`, `heuresPrevues`, `nbJoursAnnualisation`) VALUES
+(1, 1, '2024', '07:00:00', -3),
+(2, 2, '2024', '07:00:00', -3),
+(3, 3, '2024', '07:00:00', -3),
+(4, 4, '2024', '07:00:00', 0),
+(5, 5, '2024', '08:00:00', 3),
+(6, 6, '2024', '08:00:00', 3),
+(7, 7, '2024', '08:00:00', 3),
+(8, 8, '2024', '08:00:00', 3),
+(9, 9, '2024', '08:00:00', 3),
+(10, 10, '2024', '07:00:00', 0),
+(11, 11, '2024', '07:00:00', -3),
+(12, 12, '2024', '07:00:00', -3);
 
 -- --------------------------------------------------------
 
@@ -94,8 +113,19 @@ CREATE TABLE `utilisateur` (
   `mdp` varchar(100) NOT NULL,
   `nom` varchar(200) NOT NULL,
   `prenom` varchar(200) NOT NULL,
-  `statut` enum('salarie','alternant','stagiaire','administrateur') NOT NULL
+  `statut` enum('salarie','alternant','stagiaire','administrateur') NOT NULL,
+  `dateArrivee` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`idUtilisateur`, `mdp`, `nom`, `prenom`, `statut`, `dateArrivee`) VALUES
+(1, '$2y$10$kM6JcR9ROwqX3B4034.mzenY9VtJ51qKsgM6/8/eyGLw3EzfL5X9q', 'Capitaine', 'Agnès', 'salarie', '2023-02-20'),
+(6, '$2y$10$YEpi493dNKtWRW2qZxyMH.vXDNhXSdJtLeQ2kL1urVCbeu11/Bp6C', 'CapitaineAdmin', 'Agnès', 'administrateur', '2023-02-20'),
+(7, '$2y$10$4V6ZZb.cQ9kgBdkDZ3NTMuQiAuW1bC4ZApW0HaOXLi0sCtgIX64Xe', 'Doe', 'John', 'alternant', '2023-02-20'),
+(8, '$2y$10$v0n961Ys46NA2Z8fxyCgeOSuBANZP/ep94G8kr0s5G6Wr/x4awR2q', 'Nomdustagiaire', 'Prenomdustagiaire', 'stagiaire', '2023-02-20');
 
 --
 -- Index pour les tables déchargées
@@ -163,7 +193,7 @@ ALTER TABLE `evenement`
 -- AUTO_INCREMENT pour la table `heuresprevues`
 --
 ALTER TABLE `heuresprevues`
-  MODIFY `idHeure` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idHeure` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `joursnontravailles`
@@ -175,7 +205,7 @@ ALTER TABLE `joursnontravailles`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

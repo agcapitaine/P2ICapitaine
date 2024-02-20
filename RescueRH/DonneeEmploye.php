@@ -10,6 +10,13 @@ $req = openDb()->prepare('select * from utilisateur where idUtilisateur=?');
 $req->execute(array($idUtilisateur));
 $employe = $req->fetch(); // Access first (and only) result line
 
+$mois = date('n');
+$annee = date('Y');
+$req2 = openDb()->prepare('select * from heuresprevues where mois=?');
+$req2->execute(array($mois));
+$heurePrevuesJours = $req2->fetch();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +38,7 @@ $employe = $req->fetch(); // Access first (and only) result line
 <h3>
     <?= $employe['prenom'] ?>
 </h3>
+
 <br>
 <br>
 <section style="background-color: #eee;">
@@ -42,7 +50,7 @@ $employe = $req->fetch(); // Access first (and only) result line
                     <div class="row">
                     <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                         <h4>Heures effectuées ce mois-ci :</h4>
-                        <p>heures effectuées ce mois-ci</p>
+                        <p><?= $heurePrevuesJours['heuresPrevues'] ?></p>
                         <h4>Heures effectuées cette année :</h4>
                         <p>heures effectuées cette année</p>
                         <h4>Objectifs de l'annualisation des heures :</h4>
