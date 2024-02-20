@@ -17,6 +17,8 @@ $req2->execute(array($mois));
 $heurePrevuesJours = $req2->fetch();
 
 
+
+
 ?>
 
 <!DOCTYPE html>
