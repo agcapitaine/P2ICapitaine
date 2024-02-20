@@ -9,9 +9,11 @@ require_once('include/head.php');
 <main class="mt-5 pt-4">
 <h2>Page d'accueil administrateur</h2>
 <br>
-<button type="button" class="btn btn-dark"><a href="ListeEmployes.php" class = "a">Données des employés</a></button>
+<a href="ListeEmployes.php" class="btn btn-light" tabindex="-1" role="button" aria-disabled="true">Données des employés</a>
 <br> <br>
-<button type="button" class="btn btn-dark"><a href="Gestion.php">Gestion</a></button>
+<a href="Gestion.php"  class="btn btn-light" tabindex="-1" role="button" aria-disabled="true">Gestion</a>
+<br> <br>
+<a href="creation_compte.php"  class="btn btn-light" tabindex="-1" role="button" aria-disabled="true">Créer un compte</a>
 
 </main>
 </div>

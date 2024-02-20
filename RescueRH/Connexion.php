@@ -45,8 +45,9 @@ require_once('include/head.php');
                 <button type="submit" class="btn btn-primary">Me connecter</button>
                 <br>
                 <br>
-                <button type="submit" class="btn btn-secondary">Créer son compte</button>
+                
             </form>
+            <a href="creation_compte.php" class="btn btn-light" tabindex="-1" role="button" aria-disabled="true">Créer son compte</a>
         </div>
         <?php
     }
