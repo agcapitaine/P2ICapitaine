@@ -50,7 +50,9 @@ $employe = $req->fetch(); // Access first (and only) result line
                     </div>
 <!-- div -->
                     <div class="col-md-6 col-lg-6 col-xl-6">
+                        <h4>Listes des congés déjà prit : </h4>
                         <p>liste des congés déjà prit par l'employé</p>
+                        <h4>Listes des congés auxquels droit : </h4>
                         <p>liste des congés auxquels droit</p>
                         <a href="AjouterConge.php">Ajouter un congé</a>
                     </div>
