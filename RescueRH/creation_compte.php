@@ -42,7 +42,7 @@ require_once('include/head.php');
                 <option value="1">Salarie</option>
                 <option value="2">Alternant</option>
                 <option value="3">Stagiaire</option>
-                <option value="3">Administrateur</option>
+                <option value="4">Administrateur</option>
             </select>
             </div>
             <br>

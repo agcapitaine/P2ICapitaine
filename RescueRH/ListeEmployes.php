@@ -18,7 +18,8 @@ $employes = openDB()->query('select * from utilisateur order by idUtilisateur de
 <br>
 <section style="background-color: #eee;">
         <div class="container py-5">
-            <?php foreach ($employes as $employe) { ?>
+            <?php foreach ($employes as $employe) { 
+                if ($employe['statut']!= 'administrateur') {?>
                 <div class="row justify-content-center mb-3">
                     <div class="col-md-12 col-xl-10">
                     <div class="card shadow-0 border rounded-3">
@@ -43,6 +44,7 @@ $employes = openDB()->query('select * from utilisateur order by idUtilisateur de
                     </div>
                     </div>
                 </div>
+                <?php } ?>              
             <?php } ?>
         </div>
 </section>
