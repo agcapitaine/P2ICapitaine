@@ -10,21 +10,59 @@ $req = openDb()->prepare('select * from utilisateur where idUtilisateur=?');
 $req->execute(array($idUtilisateur));
 $employe = $req->fetch(); // Access first (and only) result line
 
+//selectionne les heures journalières prévues
 $mois = date('n');
 $annee = date('Y');
 $req2 = openDb()->prepare('select * from heuresprevues where mois=?');
 $req2->execute(array($mois));
 $heurePrevuesJours = $req2->fetch();
 
+//compte le nombre de conges que l'employé a pris ce mois-ci
 $conges = openDb()->prepare('select * from congeemploye where idUtilisateur=?');
 $conges->execute(array($idUtilisateur));
 $nbconges = $conges->rowCount();
 
+//compte le nombre de jours non travailles prévus ce mois-ci
 $joursnontravailles = openDb()->prepare('select * from joursnontravailles where month(dateArret)=?');
 $joursnontravailles->execute(array($mois));
 $nbjoursnontravailles = $joursnontravailles->rowCount();
 
+//compte le nombre de jours ouvres
+function nombreJoursOuvres($mois, $annee) {
+    $nombreJours = cal_days_in_month(CAL_GREGORIAN, $mois, $annee);   
+    $joursOuvres = 0;   
+    // Parcourir tous les jours du mois
+    for ($jour = 1; $jour <= $nombreJours; $jour++) {
+        // Récupérer le timestamp UNIX pour le jour
+        $timestamp = mktime(0, 0, 0, $mois, $jour, $annee);       
+        // Vérifier si le jour est un weekend (samedi ou dimanche)
+        $jourSemaine = date('N', $timestamp);
+        if ($jourSemaine <= 5) {
+            $joursOuvres++;
+        }
+    }   
+    return $joursOuvres;
+}
 
+// $heureParMois = $heurePrevuesJours*4;
+// nombreJoursOuvres($mois, $annee) - $nbconges - $joursnontravailles;
+
+
+//compte le nombre de conges auxquels l'employé a droit
+$statutEmploye = $employe['statut'];
+$congesDroit = openDb()->prepare('select * from conge where statutConcerne=?');
+$congesDroit->execute(array($statutEmploye));
+
+//compte le nombre de congé restant (dans le cas d'un type de congé précis (congé concerné))
+function nombreCongesRestant($conges, $congedroit){
+    $nbcongesconcerne = $congedroit['nbJours'];  
+    foreach ($conges as $conge) {       
+        if ($conge['titreConge']==$congedroit['titreConge']){
+            $nbcongesconcerne=$nbcongesconcerne-1; 
+        }
+    }
+    return $nbcongesconcerne;
+}
 
 ?>
 
@@ -68,11 +106,29 @@ $nbjoursnontravailles = $joursnontravailles->rowCount();
 <!-- div -->
                     <div class="col-md-6 col-lg-6 col-xl-6">
                         <h4>Listes des congés déjà pris : </h4>
-                        <p>liste des congés déjà pris par l'employé</p>
-                        <h4>Nombre jours non travailles : </h4>
-                        <p><?= $nbjoursnontravailles ?></p>
+                        <ol>
+                            <?php foreach ($conges as $conge) { ?>
+                                <ul class="list-group">
+                                <li class="list-group-item"><p><?= $conge['dateConge'] ?></p></li>                             
+                                </ul> 
+                            <?php } ?>
+                        </ol>
+
                         <h4>Listes des congés auxquels droit : </h4>
-                        <p>liste des congés auxquels droit</p>
+                        <ol>
+                        <?php foreach ($congesDroit as $congedroit) { 
+                            $conges = openDb()->prepare('select * from congeemploye where idUtilisateur=?');
+                            $conges->execute(array($idUtilisateur));
+                            ?>
+                                <ul class="list-group">
+                                <li class="list-group-item">
+                                    <p> Titre du congé : <?= $congedroit['titreConge'] ?></p>
+                                    <p> Nombre de jours alloués : <?= $congedroit['nbJours'] ?></p>
+                                    <p> Nombre de jours alloués restant : <?= nombreCongesRestant($conges, $congedroit) ?></p>
+                                </li>                             
+                                </ul> 
+                            <?php } ?>
+                        </ol>
                         <a href="AjouterConge.php">Ajouter un congé</a>
                     </div>
                     </div>

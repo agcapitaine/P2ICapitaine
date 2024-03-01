@@ -23,5 +23,18 @@ $heurePrevuesJours2 = strtotime($heureString);
 
 
 $heuresPrevuesMois = $heurePrevuesJours2*nombreJoursOuvres($mois, $annee);
-?>
 
+
+
+//compte le nombre de congé restant (dans le cas d'un type de congé précis (congé concerné))
+function nombreCongesRestant($conges, $congedroit){
+    $nbcongesconcerne = $congedroit['nbJours'];  
+    foreach ($conges as $conge) {       
+        if ($conge['titreConge']==$congedroit['titreConge']){
+            $nbcongesconcerne=$nbcongesconcerne-1; 
+        }
+    }
+    return $nbcongesconcerne;
+}
+
+?>
