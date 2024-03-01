@@ -3,7 +3,7 @@ require_once('include/head.php');
 include("include/fonctions.php");
 $pageTitle = "Donnée Employé";
 require_once('include/head.php');
-
+ 
 //selectionne les informations de cet employé
 $idUtilisateur = $_GET['id'];
 $req = openDb()->prepare('select * from utilisateur where idUtilisateur=?');
@@ -16,6 +16,13 @@ $req2 = openDb()->prepare('select * from heuresprevues where mois=?');
 $req2->execute(array($mois));
 $heurePrevuesJours = $req2->fetch();
 
+$conges = openDb()->prepare('select * from congeemploye where idUtilisateur=?');
+$conges->execute(array($idUtilisateur));
+$nbconges = $conges->rowCount();
+
+$joursnontravailles = openDb()->prepare('select * from joursnontravailles where month(dateArret)=?');
+$joursnontravailles->execute(array($mois));
+$nbjoursnontravailles = $joursnontravailles->rowCount();
 
 
 
@@ -60,8 +67,10 @@ $heurePrevuesJours = $req2->fetch();
                     </div>
 <!-- div -->
                     <div class="col-md-6 col-lg-6 col-xl-6">
-                        <h4>Listes des congés déjà prit : </h4>
-                        <p>liste des congés déjà prit par l'employé</p>
+                        <h4>Listes des congés déjà pris : </h4>
+                        <p>liste des congés déjà pris par l'employé</p>
+                        <h4>Nombre jours non travailles : </h4>
+                        <p><?= $nbjoursnontravailles ?></p>
                         <h4>Listes des congés auxquels droit : </h4>
                         <p>liste des congés auxquels droit</p>
                         <a href="AjouterConge.php">Ajouter un congé</a>

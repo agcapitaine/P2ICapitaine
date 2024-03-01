@@ -24,3 +24,4 @@ $heurePrevuesJours2 = strtotime($heureString);
 
 $heuresPrevuesMois = $heurePrevuesJours2*nombreJoursOuvres($mois, $annee);
 ?>
+

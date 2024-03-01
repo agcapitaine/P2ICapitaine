@@ -3,7 +3,7 @@ require_once('include/head.php');
 include("include/fonctions.php");
 $pageTitle = "Liste employés";
 $employes = openDB()->query('select * from utilisateur order by idUtilisateur desc');
-?>
+?> 
 
 <!DOCTYPE html>
 <html lang="fr">
