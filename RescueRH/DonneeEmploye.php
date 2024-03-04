@@ -56,12 +56,15 @@ $congesDroit->execute(array($statutEmploye));
 //compte le nombre de congé restant (dans le cas d'un type de congé précis (congé concerné))
 function nombreCongesRestant($conges, $congedroit){
     $nbcongesconcerne = $congedroit['nbJours'];  
-    foreach ($conges as $conge) {       
-        if ($conge['titreConge']==$congedroit['titreConge']){
+    foreach ($conges as $conge) { 
+        if ($nbcongesconcerne==1){
+            return "Plus de congés disponibles.";
+        }      
+        else if ($conge['titreConge']==$congedroit['titreConge']){
             $nbcongesconcerne=$nbcongesconcerne-1; 
         }
     }
-    return $nbcongesconcerne;
+        return $nbcongesconcerne;   
 }
 
 ?>
