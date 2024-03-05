@@ -45,4 +45,14 @@ function nombreCongesRestant($conges, $congedroit){
     //     echo "banane";
     // }
 
+
+
+            //Execution de la requête
+            $sql = "UPDATE heuresprevues SET mois='$mois', annee='$annee', heuresPrevues='$heuresPrevues', nbJoursAnnualisation='$nbJours' WHERE idHeure=$id";
+            $answer = $BDD->query($sql);
+
+    
+                
+
+
 ?>
