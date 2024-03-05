@@ -19,30 +19,19 @@ $reussi = false;
         $heuresPrevues = escape($_POST['heuresPrevues']);
         $nbJours = escape($_POST['nbJours']);
 
-        // // on cree la requete pour trouver l'id
-        // $requete = "SELECT * FROM heuresprevues WHERE annee=:element1 AND mois=:element2";
-        // $reponse = $BDD->prepare($requete);
-        // $reponse->execute(array(':element1' => $annee, ':element2' => $mois));
-        // $result = $reponse->fetch();
-
-        // $id = $result[0];
-        // echo $id;
-
         // on crée la requête pour trouver l'id
         $requete = "SELECT * FROM heuresprevues WHERE annee=:element1 AND mois=:element2";
         $reponse = $BDD->prepare($requete);
         $reponse->execute(array(':element1' => $annee, ':element2' => $mois));
         $result = $reponse->fetch();
 
-        // Vérifiez si une ligne a été trouvée
-        if ($result) {
-            $id = $result['idHeure']; // Accès à la colonne 'id'
-            echo $id;
-        } else {
-            echo "Aucun résultat trouvé.";
-        }
+        $id = $result['idHeure']; // Accès à la colonne 'id'
 
+        //Execution de la requête
+        $sql = "UPDATE heuresprevues SET mois='$mois', annee='$annee', heuresPrevues='$heuresPrevues', nbJoursAnnualisation='$nbJours' WHERE idHeure=$id";
+        $answer = $BDD->query($sql);
 
+            
     }
     ?>
 </body>
