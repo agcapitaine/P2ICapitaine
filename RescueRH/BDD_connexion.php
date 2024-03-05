@@ -14,7 +14,7 @@ $BDD = openDB();
     if (!empty($_POST['nom']) && !empty($_POST['mdp'])) {
         //on vérifie les saisies utilisateurs avec la fonction escape avant de les enregistrer dans des variables
         $nom = escape($_POST['nom']);
-        $mdp = escape($_POST['mdp']);
+        $mdp = escape($_POST['mdp']); 
 
         // on cree la requete
         $requete = "SELECT * FROM utilisateur WHERE nom = ?";

@@ -37,4 +37,12 @@ function nombreCongesRestant($conges, $congedroit){
     return $nbcongesconcerne;
 }
 
+
+    // if (is_array($reponse)) {
+    //     // $value = $result[0]; // Accès sécurisé au premier élément du tableau
+    //     echo "banane reussi";
+    // } else {
+    //     echo "banane";
+    // }
+
 ?>

@@ -3,7 +3,7 @@ session_start();
 include("include/fonctions.php");
 $pageTitle = "Vérification compte";
 require_once('include/head.php');
-$reussi = false;
+$reussi = false; 
 
 $nom = escape($_POST['nom']);
 $nom_identique = openDB()->query("select * from utilisateur where nom='$nom'");

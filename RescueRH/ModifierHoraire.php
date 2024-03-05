@@ -20,7 +20,7 @@ require_once('include/head.php');
 
             <div class="form-group">
             <label for="formGroupExampleInput">Mois</label>
-            <select class="form-select" id="statut" name="statut" aria-label="Default select example">
+            <select class="form-select" id="mois" name="mois" aria-label="Default select example">
                 <option selected>Sélectionnez</option>
                 <option value="1">Janvier</option>
                 <option value="2">Février</option>
@@ -33,27 +33,37 @@ require_once('include/head.php');
                 <option value="9">Septembre</option>
                 <option value="10">Octobre</option>
                 <option value="11">Novembre</option>
-                <option value="4">Décembre</option>
+                <option value="12">Décembre</option>
             </select>
             </div>
-            <br>
-            <label for="start">Année</label>
-            <input type="date" id="annee" name="annee" value="2018-07-22" min="2018-01-01" max="2036-12-31" />
             <br>
             <div class="form-group">
             <label for="formGroupExampleInput">Année</label>
-            <select class="form-select" id="statut" name="statut" aria-label="Default select example">
+            <select class="form-select" id="annee" name="annee" aria-label="Default select example">
                 <option selected>Sélectionnez</option>
-                <option value="1">Salarie</option>
-                <option value="2">Alternant</option>
-                <option value="3">Stagiaire</option>
-                <option value="4">Administrateur</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
             </select>
             </div>
             <br>
+            <div class="form-group">
+            <label for="formGroupExampleInput">Nombre d'heures prevues</label> <br>
+            <!-- modif min max avec convention -->
+            <input type="time" id="heuresPrevues" name="heuresPrevues" min="00:00" max="10:00" required /> 
+            </div>
+            <br>
+            <div class="form-group">
+            <label for="formGroupExampleInput">Nombre de jours d'annualisation prévus</label> <br>
+            <input type="number" id="nbJours" name="nbJours"/> 
+            </div>
 
             <br>
-            <button type="submit" class="btn btn-primary">Créer mon compte</button>
+            <button type="submit" class="btn btn-primary">Valider</button>
         </form>
     </div>
 
