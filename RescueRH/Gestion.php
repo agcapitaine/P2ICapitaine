@@ -23,9 +23,11 @@ $pageTitle = "Gestion";
 
 <form class="" action="ModifierHoraire.php" method="post">
 <input type="submit" name="modifier" class="btn btn-primary  btn-lg" value="Modifier les horaires">
+<a href="AjouterJoursNT.php">jours nt</a>
+<a href="AjouterEvent.php">event</a>
 
 <form class="" action="AjouterJoursNT.php" method="post">
-<input type="submit" name="modifier" class="btn btn-primary  btn-lg" value="Ajouter des jours non travaillés">                     
+<input type="submit" name="ajouter" class="btn btn-primary  btn-lg" value="Ajouter des jours non travaillés">                     
 
 <form class="" action="AjouterEvent.php" method="post">
 <input type="submit" name="event" class="btn btn-primary  btn-lg" value="Ajouter un événement">   

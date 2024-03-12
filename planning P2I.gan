@@ -7,7 +7,7 @@
         <option id="taskLabelRight" value="name"/>
         <option id="filter.completedTasks" value="false"/>
         <option id="color.recent">
-            <![CDATA[#ffff33 #ccffff #ff0033 #ff3333]]>
+            <![CDATA[#ffff99 #ffff33 #ccffff #ff0033 #ff3333]]>
         </option>
     </view>
     <view id="resource-table">
@@ -69,7 +69,7 @@
             </task>
             <task id="17" name="Création page affichage" color="#8cb6ce" meeting="false" start="2024-02-16" duration="4" complete="100" thirdDate="2024-02-05" thirdDate-constraint="0" expand="true"/>
         </task>
-        <task id="3" name="Création requête et page pour modifier les heures effectuées par un employé (use case 2)" color="#ffff33" meeting="false" start="2024-02-20" duration="10" complete="100" thirdDate="2024-01-31" thirdDate-constraint="0" expand="true">
+        <task id="3" name="Création requête et page pour modifier les heures effectuées par un employé (use case 2)" color="#8cb6ce" meeting="false" start="2024-02-20" duration="10" complete="100" thirdDate="2024-01-31" thirdDate-constraint="0" expand="true">
             <depend id="4" type="2" difference="0" hardness="Strong"/>
             <depend id="5" type="2" difference="0" hardness="Strong"/>
             <depend id="7" type="2" difference="0" hardness="Strong"/>
@@ -77,10 +77,10 @@
             <depend id="9" type="2" difference="0" hardness="Strong"/>
             <depend id="13" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="4" name="Création requête pour accéder à un bilan des heures d’un employé selon la contrainte d’annualisation des heures" color="#8cb6ce" meeting="false" start="2024-03-01" duration="10" complete="0" thirdDate="2024-01-29" thirdDate-constraint="0" expand="true">
+        <task id="4" name="Création requête pour accéder à un bilan des heures d’un employé selon la contrainte d’annualisation des heures" color="#ffff99" meeting="false" start="2024-03-01" duration="10" complete="0" thirdDate="2024-01-29" thirdDate-constraint="0" expand="true">
             <depend id="18" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="5" name="Création requêtes et formulaires pour modifier l'emploi du temps (use case 2 et 3)" color="#8cb6ce" meeting="false" start="2024-03-01" duration="15" complete="0" thirdDate="2024-01-29" thirdDate-constraint="0" expand="true">
+        <task id="5" name="Création requêtes et formulaires pour modifier l'emploi du temps (use case 2 et 3)" color="#ffff99" meeting="false" start="2024-03-01" duration="15" complete="0" thirdDate="2024-01-29" thirdDate-constraint="0" expand="true">
             <depend id="8" type="2" difference="0" hardness="Strong"/>
             <depend id="9" type="2" difference="0" hardness="Strong"/>
             <depend id="10" type="2" difference="0" hardness="Strong"/>
@@ -90,7 +90,7 @@
             <depend id="10" type="2" difference="0" hardness="Strong"/>
             <depend id="18" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="7" name="Création requête &quot;Ajouter un congé&quot; à un employé + formulaire" color="#8cb6ce" meeting="false" start="2024-03-01" duration="10" complete="0" thirdDate="2024-01-31" thirdDate-constraint="0" expand="true">
+        <task id="7" name="Création requête &quot;Ajouter un congé&quot; à un employé + formulaire" color="#ffff99" meeting="false" start="2024-03-01" duration="10" complete="85" thirdDate="2024-01-31" thirdDate-constraint="0" expand="true">
             <depend id="10" type="2" difference="0" hardness="Strong"/>
             <depend id="18" type="2" difference="0" hardness="Strong"/>
         </task>
