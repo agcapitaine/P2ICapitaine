@@ -54,12 +54,12 @@ require_once('include/head.php');
             <div class="form-group">
             <label for="formGroupExampleInput">Nombre d'heures prevues</label> <br>
             <!-- modif min max avec convention -->
-            <input type="time" id="heuresPrevues" name="heuresPrevues" min="00:00" max="10:00" required /> 
+            <input type="time" id="heuresPrevues" name="heuresPrevues" class="form-control" min="00:00" required /> 
             </div>
             <br>
             <div class="form-group">
             <label for="formGroupExampleInput">Nombre de jours d'annualisation prévus</label> <br>
-            <input type="number" id="nbJours" name="nbJours"/> 
+            <input type="number" id="nbJours" class="form-control" name="nbJours"/> 
             </div>
 
             <br>
