@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('include/head.php');
 include("include/fonctions.php");
 $pageTitle = "Gestion";

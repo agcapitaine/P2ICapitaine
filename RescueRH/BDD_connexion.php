@@ -34,11 +34,20 @@ $BDD = openDB();
             if (password_verify($mdp, $mdp_crypte)) {
 
                 //on cree des variables de seesions pour enregistrer les informations de l'utilisateur
+                $_SESSION['idUtilisateur']= $enregistrements[0]['idUtilisateur'];
                 $_SESSION['mdp'] = $enregistrements[0]['mdp'];
                 $_SESSION['nom'] = $enregistrements[0]['nom'];
                 $_SESSION['prenom'] = $enregistrements[0]['prenom'];
                 $_SESSION['statut'] = $enregistrements[0]['statut'];
-                redirect('index.php');
+                $_SESSION['dateArrivee'] = $enregistrements[0]['dateArrivee'];
+                $id=$_SESSION['idUtilisateur'];
+                if ($_SESSION['statut']!="administrateur"){
+                    redirect('indexEmploye.php');
+                }
+                else {
+                    redirect('index.php');
+                }
+                
 
             }
             //si le mdp ne correspond pas on affiche un message d'erreur

@@ -7,16 +7,7 @@ $BDD = openDB();
 $reussi = false;
 $AleDroit= false;
 
-//compte le nombre de congé restant (dans le cas d'un type de congé précis (congé concerné))
-function nombreCongesRestant($congesdejapris, $congedroit){
-    $nbcongesconcerne = $congedroit['nbJours'];  
-    foreach ($congesdejapris as $conge) { 
-        if ($conge['titreConge']==$congedroit['titreConge']){
-            $nbcongesconcerne=$nbcongesconcerne-1; 
-        }       
-    }  
-    return $nbcongesconcerne; 
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +29,7 @@ function nombreCongesRestant($congesdejapris, $congedroit){
         $req2->execute(array($nom));
         $employe = $req2->fetch(); // Access first (and only) result line
 
-        //compte le nombre de conges auxquels l'employé a droit
+        //prend les conges auxquels l'employé a droit
         $statutEmploye = $employe['statut'];
         $congesDroit = openDb()->prepare('select * from conge where statutConcerne=?');
         $congesDroit->execute(array($statutEmploye));
@@ -48,12 +39,22 @@ function nombreCongesRestant($congesdejapris, $congedroit){
         $congesdejapris->execute(array($nom));
         $nbconges = $congesdejapris->rowCount();
 
+        //compte le nombre de congé restant (dans le cas d'un type de congé précis (congé concerné))
+        function nombreCongesRestant($congesdejapris, $congedroit){
+            $nbcongesconcerne = $congedroit['nbJours'];  
+            foreach ($congesdejapris as $conge) { 
+                if ($conge['titreConge']==$congedroit['titreConge']){
+                    $nbcongesconcerne=$nbcongesconcerne-1; 
+                }       
+            }  
+            return $nbcongesconcerne; 
+}
+
         foreach ($congesDroit as $congedroit) {
-            if (($congedroit['titreConge']==$raison) && (nombreCongesRestant($congesdejapris, $congedroit)!=1)){
+            if (($congedroit['titreConge']==$raison) && (nombreCongesRestant($congesdejapris, $congedroit)!=0)){
                     $AleDroit=true;
                     echo nombreCongesRestant($congesdejapris, $congedroit);
             }
-
         }
 
         if ($AleDroit==true)
