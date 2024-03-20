@@ -30,7 +30,7 @@ $nbjoursnontravailles = $joursnontravailles->rowCount();
 
 //compte le nombre de jours ouvres
 function nombreJoursOuvres($mois, $annee) {
-    $nombreJours = cal_days_in_month(CAL_GREGORIAN, $mois, $annee);   
+    $nombreJours = cal_days_in_month(CAL_GREGORIAN, intval($mois), intval($annee));  
     $joursOuvres = 0;   
     // Parcourir tous les jours du mois
     for ($jour = 1; $jour <= $nombreJours; $jour++) {
@@ -45,8 +45,8 @@ function nombreJoursOuvres($mois, $annee) {
     return $joursOuvres;
 }
 
-// $heureParMois = $heurePrevuesJours*4;
-// nombreJoursOuvres($mois, $annee) - $nbconges - $joursnontravailles;
+$nbJoursTravailles = nombreJoursOuvres($mois, $annee) - $nbconges - $nbjoursnontravailles;
+$heureParMois = $heurePrevuesJours['heuresPrevues']*$nbJoursTravailles;
 
 
 //compte le nombre de conges auxquels l'employé a droit
@@ -102,6 +102,7 @@ function nombreCongesRestant($conges, $congedroit){
                     <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                         <h4>Heures effectuées ce mois-ci :</h4>
                         <p><?= $heurePrevuesJours['heuresPrevues'] ?></p>
+                        <p><?= $heureParMois ?></p>
                         <h4>Heures effectuées cette année :</h4>
                         <p>heures effectuées cette année</p>
                         <h4>Objectifs de l'annualisation des heures :</h4>
