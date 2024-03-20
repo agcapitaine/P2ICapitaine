@@ -3,6 +3,13 @@ session_start();
 require_once('include/head.php');
 include("include/fonctions.php");
 $pageTitle = "Gestion";
+$annee = date('Y');
+$heuresPrevues = openDb()->prepare('select * from heuresprevues where annee=?');
+$heuresPrevues->execute(array($annee));
+$joursnontravailles = openDb()->prepare('select * from joursnontravailles where year(dateArret)=?');
+$joursnontravailles->execute(array($annee));
+$evenements = openDb()->prepare('select * from joursnontravailles where year(dateArret)=?');
+$evenements->execute(array($annee));
 ?>
 
 <!DOCTYPE html>
@@ -14,24 +21,72 @@ $pageTitle = "Gestion";
 <main class="mt-5 pt-4"> 
 
 
-<h2>Gestion</h2>
+<h1>Gestion</h1>
 <br>
 
-<p>les horaires prévus selon les mois</p>
-<p>les dates de jours non travaillés</p>
-<p>les dates de fermeture de l'atelier</p>
-<p>les événements</p>
+<h3>Bilan des heures prévues selon les mois</h3>
+<br>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Mois</th>
+      <th scope="col">Année</th>
+      <th scope="col">Nombre d'heures journalières prévues</th>
+      <th scope="col">Nombre de jours d'annualisation prévus</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
 
-<form class="" action="ModifierHoraire.php" method="post">
-<input type="submit" name="modifier" class="btn btn-primary  btn-lg" value="Modifier les horaires">
-<a href="AjouterJoursNT.php">jours nt</a>
-<a href="AjouterEvent.php">event</a>
+      <?php foreach ($heuresPrevues as $heure){?>
+        <th scope="row"><?= $heure['mois'] ?></th>
+        <td><?= $heure['annee'] ?></td>
+        <td><?= $heure['heuresPrevues'] ?></td>
+        <td><?= $heure['nbJoursAnnualisation'] ?></td>
 
-<form class="" action="AjouterJoursNT.php" method="post">
-<input type="submit" name="ajouter" class="btn btn-primary  btn-lg" value="Ajouter des jours non travaillés">                     
+    </tr>
+    <?php
+    } ?>
+  </tbody>
+</table>
+<button type="button" class="btn btn-outline-primary"><a href="ModifierHoraire.php">Modifier les horaires</a></button>
 
-<form class="" action="AjouterEvent.php" method="post">
-<input type="submit" name="event" class="btn btn-primary  btn-lg" value="Ajouter un événement">   
+<br><br><br>
+<h3>Liste des jours non travaillés</h3>
+<div>
+    <ol>
+    <?php foreach ($joursnontravailles as $jours) { ?>
+        <ul class="list-group">
+        <li class="list-group-item">
+            <?=$jours['dateArret'] ?>
+        </li>                             
+        </ul> 
+    <?php } ?>
+    </ol>
+    
+</div>
+<button type="button" class="btn btn-outline-primary"><a href="AjouterJoursNT.php">Ajouter des jours non travaillés</a></button>
+
+<br><br><br>
+<h3>Liste des événements</h3>
+<div>
+    <ol>
+    <?php foreach ($joursnontravailles as $jours) { ?>
+        <ul class="list-group">
+        <li class="list-group-item">
+            <?=$jours['dateArret'] ?>
+        </li>                             
+        </ul> 
+    <?php } ?>
+    </ol>
+    
+</div>
+<button type="button" class="btn btn-outline-primary"><a href="AjouterEvent.php">Ajouter un événement</a></button>
+
+
+
+
+
 
 </main>
 </div>
