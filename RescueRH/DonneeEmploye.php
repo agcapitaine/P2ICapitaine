@@ -18,6 +18,7 @@ $req2 = openDb()->prepare('select * from heuresprevues where mois=?');
 $req2->execute(array($mois));
 $heurePrevuesJours = $req2->fetch();
 
+
 //compte le nombre de conges que l'employé a pris ce mois-ci
 $conges = openDb()->prepare('select * from congeemploye where idUtilisateur=?');
 $conges->execute(array($idUtilisateur));
@@ -46,7 +47,13 @@ function nombreJoursOuvres($mois, $annee) {
 }
 
 $nbJoursTravailles = nombreJoursOuvres($mois, $annee) - $nbconges - $nbjoursnontravailles;
-$heureParMois = $heurePrevuesJours['heuresPrevues']*$nbJoursTravailles;
+
+if ((is_numeric($heurePrevuesJours['heuresPrevues']))){
+    $heureParMois = $heurePrevuesJours['heuresPrevues']*$nbJoursTravailles;   
+} else {
+    echo "La variable n'est pas numérique.";
+}
+
 
 
 //compte le nombre de conges auxquels l'employé a droit
