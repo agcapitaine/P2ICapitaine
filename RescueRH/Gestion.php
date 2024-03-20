@@ -8,7 +8,7 @@ $heuresPrevues = openDb()->prepare('select * from heuresprevues where annee=?');
 $heuresPrevues->execute(array($annee));
 $joursnontravailles = openDb()->prepare('select * from joursnontravailles where year(dateArret)=?');
 $joursnontravailles->execute(array($annee));
-$evenements = openDb()->prepare('select * from joursnontravailles where year(dateArret)=?');
+$evenements = openDb()->prepare('select * from evenement where year(dateEvenement)=?');
 $evenements->execute(array($annee));
 ?>
 
@@ -69,21 +69,33 @@ $evenements->execute(array($annee));
 
 <br><br><br>
 <h3>Liste des événements</h3>
-<div>
-    <ol>
-    <?php foreach ($joursnontravailles as $jours) { ?>
-        <ul class="list-group">
-        <li class="list-group-item">
-            <?=$jours['dateArret'] ?>
-        </li>                             
-        </ul> 
-    <?php } ?>
-    </ol>
-    
-</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Titre</th>
+      <th scope="col">Date</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+
+      <?php foreach ($evenements as $event){?>
+        <th scope="row"><?= $event['titre'] ?></th>
+        <td><?= $event['dateEvenement'] ?></td>
+        <td><?= $event['description'] ?></td>
+
+    </tr>
+    <?php
+    } ?>
+  </tbody>
+</table>
+
 <button type="button" class="btn btn-outline-primary"><a href="AjouterEvent.php">Ajouter un événement</a></button>
 
-
+<br>
+<br>
+<br>
 
 
 
