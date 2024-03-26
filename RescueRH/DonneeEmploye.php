@@ -9,7 +9,7 @@ require_once('include/head.php');
 $idUtilisateur = $_GET['id'];
 $req = openDb()->prepare('select * from utilisateur where idUtilisateur=?');
 $req->execute(array($idUtilisateur));
-$employe = $req->fetch(); // Access first (and only) result line
+$employe = $req->fetch(); 
 
 //selectionne les heures journalières prévues
 $mois = date('n');
@@ -17,7 +17,6 @@ $annee = date('Y');
 $req2 = openDb()->prepare('select * from heuresprevues where mois=?');
 $req2->execute(array($mois));
 $heurePrevuesJours = $req2->fetch();
-
 
 //compte le nombre de conges que l'employé a pris ce mois-ci
 $conges = openDb()->prepare('select * from congeemploye where idUtilisateur=?');
@@ -48,11 +47,19 @@ function nombreJoursOuvres($mois, $annee) {
 
 $nbJoursTravailles = nombreJoursOuvres($mois, $annee) - $nbconges - $nbjoursnontravailles;
 
-if ((is_numeric($heurePrevuesJours['heuresPrevues']))){
-    $heureParMois = $heurePrevuesJours['heuresPrevues']*$nbJoursTravailles;   
-} else {
-    echo "La variable n'est pas numérique.";
-}
+// Convertir le temps en secondes
+$secondes = strtotime($heurePrevuesJours['heuresPrevues'])- strtotime('TODAY');
+$nouvellesSecondes = $secondes * $nbJoursTravailles; // Multiplier les secondes par le nombre de jours
+$heures = floor($nouvellesSecondes / 3600); // Calculer le nombre d'heures
+$minutes = floor(($nouvellesSecondes % 3600) / 60); // Calculer le nombre de minutes restantes après la soustraction des heures
+$secondesRestantes = $nouvellesSecondes % 60; // Calculer le nombre de secondes restantes après la soustraction des heures et des minutes
+$heureParMois = sprintf("%d heures, %d minutes, %d secondes", $heures, $minutes, $secondesRestantes);
+
+//Compter nombre heures effectuées cette année
+
+// for ($month = 1; $month <= $mois; $month++) {
+
+// }
 
 
 
@@ -108,7 +115,6 @@ function nombreCongesRestant($conges, $congedroit){
                     <div class="row">
                     <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                         <h4>Heures effectuées ce mois-ci :</h4>
-                        <p><?= $heurePrevuesJours['heuresPrevues'] ?></p>
                         <p><?= $heureParMois ?></p>
                         <h4>Heures effectuées cette année :</h4>
                         <p>heures effectuées cette année</p>
