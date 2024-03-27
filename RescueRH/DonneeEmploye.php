@@ -55,11 +55,33 @@ $minutes = floor(($nouvellesSecondes % 3600) / 60); // Calculer le nombre de min
 $secondesRestantes = $nouvellesSecondes % 60; // Calculer le nombre de secondes restantes après la soustraction des heures et des minutes
 $heureParMois = sprintf("%d heures, %d minutes, %d secondes", $heures, $minutes, $secondesRestantes);
 
+
+
 //Compter nombre heures effectuées cette année
+$secondeAnneeTotal=0;
+for ($month = 1; $month <= $mois; $month++) {
+    $requeteA = openDb()->prepare('select * from heuresprevues where mois=?');
+    $requeteA->execute(array($month));
+    $heurePrevuesJoursBoucle = $requeteA->fetch();
 
-// for ($month = 1; $month <= $mois; $month++) {
+    $congesBoucle = openDb()->prepare('select * from congeemploye where idUtilisateur=?');
+    $congesBoucle->execute(array($idUtilisateur));
+    $nbcongesBoucle = $conges->rowCount();
 
-// }
+    $joursnontravaillesBoucle = openDb()->prepare('select * from joursnontravailles where month(dateArret)=?');
+    $joursnontravaillesBoucle->execute(array($month));
+    $nbjoursnontravaillesBoucle = $joursnontravaillesBoucle->rowCount();
+
+    $nbJoursTravaillesBoucle = nombreJoursOuvres($month, $annee) - $nbcongesBoucle - $nbjoursnontravaillesBoucle;
+
+    $secondesBoucle = strtotime($heurePrevuesJoursBoucle['heuresPrevues'])- strtotime('TODAY');
+    $nouvellesSecondesBoucle = $secondesBoucle * $nbJoursTravaillesBoucle;
+    $secondeAnneeTotal = $nouvellesSecondesBoucle + $secondeAnneeTotal;
+}
+$heuresAnnee = floor($secondeAnneeTotal / 3600); // Calculer le nombre d'heures
+$minutesAnnee = floor(($secondeAnneeTotal % 3600) / 60); // Calculer le nombre de minutes restantes après la soustraction des heures
+$secondesRestantesAnnee = $secondeAnneeTotal % 60; // Calculer le nombre de secondes restantes après la soustraction des heures et des minutes
+$heureParAnnee = sprintf("%d heures, %d minutes, %d secondes", $heuresAnnee, $minutesAnnee, $secondesRestantesAnnee);
 
 
 
@@ -117,7 +139,7 @@ function nombreCongesRestant($conges, $congedroit){
                         <h4>Heures effectuées ce mois-ci :</h4>
                         <p><?= $heureParMois ?></p>
                         <h4>Heures effectuées cette année :</h4>
-                        <p>heures effectuées cette année</p>
+                        <p><?= $heureParAnnee ?></p>
                         <h4>Objectifs de l'annualisation des heures :</h4>
                         <p>objectifs de l'annualisation des heures</p>
                     </div>
