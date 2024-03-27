@@ -23,8 +23,8 @@ $req2->execute(array($mois));
 $heurePrevuesJours = $req2->fetch();
 
 //compte le nombre de conges que l'employé a pris ce mois-ci
-$conges = openDb()->prepare('select * from congeemploye where idUtilisateur=?');
-$conges->execute(array($idUtilisateur));
+$conges = openDb()->prepare('select * from congeemploye where idUtilisateur=:element1 and month(dateConge)=:element2');
+$conges->execute(array(':element1' => $idUtilisateur, ':element2' => $mois));
 $nbconges = $conges->rowCount();
 
 //compte le nombre de jours non travailles prévus ce mois-ci
@@ -68,9 +68,9 @@ for ($month = 1; $month <= $mois; $month++) {
     $requeteA->execute(array($month));
     $heurePrevuesJoursBoucle = $requeteA->fetch();
 
-    $congesBoucle = openDb()->prepare('select * from congeemploye where idUtilisateur=?');
-    $congesBoucle->execute(array($idUtilisateur));
-    $nbcongesBoucle = $conges->rowCount();
+    $congesBoucle = openDb()->prepare('select * from congeemploye where idUtilisateur=:element1 and month(dateConge)=:element2');
+    $congesBoucle->execute(array(':element1' => $idUtilisateur, ':element2' => $month));
+    $nbcongesBoucle = $congesBoucle->rowCount();
 
     $joursnontravaillesBoucle = openDb()->prepare('select * from joursnontravailles where month(dateArret)=?');
     $joursnontravaillesBoucle->execute(array($month));
@@ -151,7 +151,7 @@ function nombreCongesRestant($conges, $congedroit){
                     </div>
 <!-- div -->
                     <div class="col-md-6 col-lg-6 col-xl-6">
-                        <h4>Listes des congés déjà pris : </h4>
+                        <h4>Listes des congés pris ce mois-ci : </h4>
                         <ol>
                             <?php foreach ($conges as $conge) { ?>
                                 <ul class="list-group">
