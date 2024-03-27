@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 20 fév. 2024 à 16:07
+-- Généré le : mer. 27 mars 2024 à 22:16
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -34,6 +34,24 @@ CREATE TABLE `conge` (
   `nbJours` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `conge`
+--
+
+INSERT INTO `conge` (`idConge`, `statutConcerne`, `titreConge`, `nbJours`) VALUES
+(1, 'salarie', 'Mariage ou PACS (du salarié)', 4),
+(2, 'salarie', 'Mariage d\'un enfant', 1),
+(3, 'salarie', 'Naissance ou adoption d\'un enfant ', 3),
+(4, 'salarie', 'Décès conjoint', 5),
+(5, 'salarie', 'Décès famille', 3),
+(6, 'salarie', 'Désignation comme tuteur d\'un enfant', 3),
+(7, 'salarie', 'Survenue d\'un handicap (enfant)', 4),
+(9, 'salarie', 'Survenue d\'un handicap (conjoint)', 2),
+(10, 'salarie', 'Enfant malade (<16ans)', 3),
+(11, 'salarie', 'Vacances salarie', 30),
+(12, 'alternant', 'Vacances alternant', 30),
+(13, 'stagiaire', 'Vacances stagiaire', 5);
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +65,14 @@ CREATE TABLE `congeemploye` (
   `dateConge` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `congeemploye`
+--
+
+INSERT INTO `congeemploye` (`idCongeEmploye`, `idUtilisateur`, `titreConge`, `dateConge`) VALUES
+(1, 1, 'Vacances salarie', '2024-03-04'),
+(2, 1, 'Vacances salarie', '2024-02-14');
+
 -- --------------------------------------------------------
 
 --
@@ -56,8 +82,17 @@ CREATE TABLE `congeemploye` (
 CREATE TABLE `evenement` (
   `idEvenement` int(11) NOT NULL,
   `dateEvenement` date NOT NULL,
-  `titre` varchar(500) NOT NULL
+  `titre` varchar(500) NOT NULL,
+  `description` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `evenement`
+--
+
+INSERT INTO `evenement` (`idEvenement`, `dateEvenement`, `titre`, `description`) VALUES
+(1, '2024-03-04', 'Anniv Agnès', 'Anniversaire de Agnès'),
+(2, '2024-02-22', 'Anniv François', 'Anniversaire François');
 
 -- --------------------------------------------------------
 
@@ -101,6 +136,15 @@ CREATE TABLE `joursnontravailles` (
   `idJours` int(11) NOT NULL,
   `dateArret` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `joursnontravailles`
+--
+
+INSERT INTO `joursnontravailles` (`idJours`, `dateArret`) VALUES
+(1, '2024-01-08'),
+(2, '2024-01-09'),
+(3, '2024-01-19');
 
 -- --------------------------------------------------------
 
@@ -175,19 +219,19 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `conge`
 --
 ALTER TABLE `conge`
-  MODIFY `idConge` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idConge` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `congeemploye`
 --
 ALTER TABLE `congeemploye`
-  MODIFY `idCongeEmploye` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCongeEmploye` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `evenement`
 --
 ALTER TABLE `evenement`
-  MODIFY `idEvenement` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idEvenement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `heuresprevues`
@@ -199,7 +243,7 @@ ALTER TABLE `heuresprevues`
 -- AUTO_INCREMENT pour la table `joursnontravailles`
 --
 ALTER TABLE `joursnontravailles`
-  MODIFY `idJours` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idJours` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
