@@ -10,6 +10,7 @@ $joursnontravailles = openDb()->prepare('select * from joursnontravailles where 
 $joursnontravailles->execute(array($annee));
 $evenements = openDb()->prepare('select * from evenement where year(dateEvenement)=?');
 $evenements->execute(array($annee));
+require_once('include/navbar.php');
 ?>
 
 <!DOCTYPE html>

@@ -53,7 +53,7 @@ $AleDroit= false;
         foreach ($congesDroit as $congedroit) {
             if (($congedroit['titreConge']==$raison) && (nombreCongesRestant($congesdejapris, $congedroit)!=0)){
                     $AleDroit=true;
-                    echo nombreCongesRestant($congesdejapris, $congedroit);
+                    // echo nombreCongesRestant($congesdejapris, $congedroit);
             }
         }
 
@@ -77,7 +77,7 @@ $AleDroit= false;
                 <div class="col-md-12 border rounded text-center shadow-lg p-3 mt-5 mb-5 border-success">
                     <h3>Votre modification a bien été prise en compte.</h3>
                     <br>
-                    <a type="button" class="btn btn-primary" href="Gestion.php">Continuer</a>
+                    <a type="button" class="btn btn-primary" href="index.php">Continuer</a>
                 </div>
 
             </div>

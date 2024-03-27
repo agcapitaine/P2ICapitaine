@@ -5,6 +5,7 @@ $pageTitle = "Ajouter un congé";
 require_once('include/head.php');
 $employes = openDB()->query('select * from utilisateur order by idUtilisateur desc');
 $conges = openDB()->query('select * from conge order by idConge desc');
+require_once('include/navbar.php');
 ?>
 
 <!DOCTYPE html>

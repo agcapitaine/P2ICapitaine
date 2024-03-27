@@ -4,6 +4,7 @@ session_start();
 include("include/fonctions.php");
 $pageTitle = "Modifier les horaires";
 require_once('include/head.php');
+require_once('include/navbar.php');
 ?>
 
 <!DOCTYPE html>
@@ -53,8 +54,7 @@ require_once('include/head.php');
             <br>
             <div class="form-group">
             <label for="formGroupExampleInput">Nombre d'heures prevues</label> <br>
-            <!-- modif min max avec convention -->
-            <input type="time" id="heuresPrevues" name="heuresPrevues" class="form-control" min="00:00" required /> 
+            <input type="time" id="heuresPrevues" name="heuresPrevues" class="form-control" min="00:00" max="10:00" required /> 
             </div>
             <br>
             <div class="form-group">

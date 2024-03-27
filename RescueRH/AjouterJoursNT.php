@@ -3,6 +3,7 @@ session_start();
 include("include/fonctions.php");
 $pageTitle = "Ajouter des jours non travaillés";
 require_once('include/head.php');
+require_once('include/navbar.php');
 ?>
 
 <!DOCTYPE html>

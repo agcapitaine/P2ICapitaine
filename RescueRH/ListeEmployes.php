@@ -4,6 +4,7 @@ require_once('include/head.php');
 include("include/fonctions.php");
 $pageTitle = "Liste employés";
 $employes = openDB()->query('select * from utilisateur order by idUtilisateur desc');
+require_once('include/navbar.php');
 ?> 
 
 <!DOCTYPE html>

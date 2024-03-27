@@ -5,6 +5,7 @@ $pageTitle = "Vérification horaire";
 require_once('include/head.php');
 $BDD = openDB();
 $reussi = false;
+require_once('include/navbar.php');
 ?>
 
 <!DOCTYPE html>

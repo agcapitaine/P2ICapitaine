@@ -3,6 +3,7 @@ session_start();
 include("include/fonctions.php");
 $pageTitle = "Créer un compte";
 require_once('include/head.php');
+require_once('include/navbar.php');
 ?>
 
 <!DOCTYPE html>

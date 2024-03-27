@@ -4,6 +4,10 @@ require_once('include/head.php');
 include("include/fonctions.php");
 $pageTitle = "Donnée Employé";
 require_once('include/head.php');
+if ($_SESSION['statut']=="administrateur"){ 
+    require_once('include/navbar.php');
+}  
+
  
 //selectionne les informations de cet employé
 $idUtilisateur = $_GET['id'];
@@ -94,7 +98,7 @@ $congesDroit->execute(array($statutEmploye));
 function nombreCongesRestant($conges, $congedroit){
     $nbcongesconcerne = $congedroit['nbJours'];  
     foreach ($conges as $conge) { 
-        if ($nbcongesconcerne==1){
+        if ($nbcongesconcerne==0){
             return "Plus de congés disponibles.";
         }      
         else if ($conge['titreConge']==$congedroit['titreConge']){
@@ -140,8 +144,10 @@ function nombreCongesRestant($conges, $congedroit){
                         <p><?= $heureParMois ?></p>
                         <h4>Heures effectuées cette année :</h4>
                         <p><?= $heureParAnnee ?></p>
-                        <h4>Objectifs de l'annualisation des heures :</h4>
-                        <p>objectifs de l'annualisation des heures</p>
+                        <h4>Limites de l'annualisation des heures :</h4>
+                        <p>1600 heures par an</p>
+                        <p>10 heures par jours</p>
+                        <p>48 heures maximum par semaine</p>
                     </div>
 <!-- div -->
                     <div class="col-md-6 col-lg-6 col-xl-6">
@@ -169,7 +175,12 @@ function nombreCongesRestant($conges, $congedroit){
                                 </ul> 
                             <?php } ?>
                         </ol>
-                        <a href="AjouterConge.php">Ajouter un congé</a>
+                        <?php
+                            if ($_SESSION['statut']=="administrateur"){ ?>
+                                <a href="AjouterConge.php">Ajouter un congé</a>
+                                <?php
+                            }                      
+                        ?>
                     </div>
                     </div>
                     </div>
