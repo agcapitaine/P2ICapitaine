@@ -179,7 +179,11 @@ function nombreCongesRestant($conges, $congedroit){
                             if ($_SESSION['statut']=="administrateur"){ ?>
                                 <a href="AjouterConge.php">Ajouter un congé</a>
                                 <?php
-                            }                      
+                            } 
+                            else { ?>
+                                <a href="Deconnexion.php">Se déconnecter</a>
+                                <?php
+                            }                     
                         ?>
                     </div>
                     </div>
