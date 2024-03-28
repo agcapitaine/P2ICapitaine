@@ -11,7 +11,7 @@ require_once('include/head.php');
 <body>
     <?php
     //si l'utilisateur est déjà connecté on affiche un message d'erreur
-    if (isset($_SESSION['id_membre'])) { ?>
+    if (isset($_SESSION['idUtilisateur'])) { ?>
         <main role="main">
             <div class="container">
                 <div class="col-md-12 border rounded text-center shadow-lg p-3 mt-5 mb-5 border-warning">
@@ -41,8 +41,6 @@ require_once('include/head.php');
                         placeholder="Entrez votre mot de passe">
                 </div>
                 <br>
-
-
 
                 <button type="submit" class="btn btn-primary">Me connecter</button>
                 <br>
