@@ -3,7 +3,9 @@ session_start();
 include("include/fonctions.php");
 $pageTitle = "Ajouter un congé";
 require_once('include/head.php');
+//on sélectionne tous les employés
 $employes = openDB()->query('select * from utilisateur order by idUtilisateur desc');
+//on sélectionne tous les conges
 $conges = openDB()->query('select * from conge order by idConge desc');
 require_once('include/navbar.php');
 ?>
@@ -22,7 +24,8 @@ require_once('include/navbar.php');
             <div class="form-group">
                 <label for="formGroupExampleInput">Nom de l'employé</label>
                 <select class="form-select" id="nom" name="nom" aria-label="Default select example">
-                    <option selected>Sélectionnez</option>
+                    <option selected>Sélectionnez</option> 
+                    <!-- on peut sélectionner uniquement ce qui est dans la base de données -->
                     <?php foreach ($employes as $employe) { ?>
                     <option value="<?= $employe['idUtilisateur']?>"> <?= $employe['nom'] ?> </option>
                     <?php }?>
@@ -34,6 +37,7 @@ require_once('include/navbar.php');
                 <label for="formGroupExampleInput">Raison du congé</label>
                 <select class="form-select" id="raison" name="raison" aria-label="Default select example">
                     <option selected>Sélectionnez</option>
+                    <!-- on peut sélectionner uniquement ce qui est dans la base de données -->
                     <?php foreach ($conges as $conge) { ?>
                     <option value="<?= $conge['titreConge'] ?>"> <?= $conge['titreConge'] ?> </option>
                     <?php }?>

@@ -18,7 +18,7 @@ if ($nb_nom == 0) {
     $prenom = escape($_POST['prenom']);
     $statut = escape($_POST['statut']);
 
-    //on insère les données dans la table membre
+    //on insère les données dans la table utilisateur
     $req = "INSERT INTO utilisateur (mdp, nom, prenom, statut) VALUES (?,?,?,?)";
     $reponse = openDB()->prepare($req);
     $reponse->execute(array($mdp_crypte, $nom, $prenom, $statut));

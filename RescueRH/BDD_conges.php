@@ -24,22 +24,22 @@ $AleDroit= false;
         $date = escape($_POST['date']);
         $raison = escape($_POST['raison']);
 
-        //on recup l'employé
+        //on recupere l'employé
         $req2 = openDb()->prepare('select * from utilisateur where idUtilisateur=?');
         $req2->execute(array($nom));
         $employe = $req2->fetch(); // Access first (and only) result line
 
-        //prend les conges auxquels l'employé a droit
+        //on prend les conges auxquels l'employé a droit
         $statutEmploye = $employe['statut'];
         $congesDroit = openDb()->prepare('select * from conge where statutConcerne=?');
         $congesDroit->execute(array($statutEmploye));
 
-        //compte le nombre de conges que l'employé a pris
+        //on compte le nombre de conges que l'employé a pris
         $congesdejapris = openDb()->prepare('select * from congeemploye where idUtilisateur=?');
         $congesdejapris->execute(array($nom));
         $nbconges = $congesdejapris->rowCount();
 
-        //compte le nombre de congé restant (dans le cas d'un type de congé précis (congé concerné))
+        //on compte le nombre de congé restant (dans le cas d'un type de congé précis (congé concerné))
         function nombreCongesRestant($congesdejapris, $congedroit){
             $nbcongesconcerne = $congedroit['nbJours'];  
             foreach ($congesdejapris as $conge) { 
@@ -53,13 +53,12 @@ $AleDroit= false;
         foreach ($congesDroit as $congedroit) {
             if (($congedroit['titreConge']==$raison) && (nombreCongesRestant($congesdejapris, $congedroit)!=0)){
                     $AleDroit=true;
-                    // echo nombreCongesRestant($congesdejapris, $congedroit);
             }
         }
 
         if ($AleDroit==true)
         {
-            //on insère les données dans la table membre
+            //on insère les données dans la table congeemploye
             $req = "INSERT INTO congeemploye (idUtilisateur, titreConge, dateConge) VALUES (?,?,?)";
             $reponse = openDB()->prepare($req);
             $reponse->execute(array($nom, $raison, $date));
@@ -69,7 +68,7 @@ $AleDroit= false;
 
     }
     
-    //si l'insertion a eu lieu on informe l'utilisateur que le compte a bien été crée
+    //si l'insertion a eu lieu on informe l'utilisateur que c'est bon
     if ($reussi == true) {
         ?>
         <main role="main">

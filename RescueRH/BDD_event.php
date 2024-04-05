@@ -28,7 +28,7 @@ require_once('include/navbar.php');
 
     }
     
-    //si l'insertion a eu lieu on informe l'utilisateur que le compte a bien été crée
+    //si l'insertion a eu lieu on informe l'utilisateur que c'est bon
     if ($reussi == true) {
         ?>
         <main role="main">

@@ -3,6 +3,7 @@ session_start();
 include("include/fonctions.php");
 $pageTitle = "Accueil Employé";
 require_once('include/head.php');
+// Avec la connexion de l'utilisateur on peut récupérer son id et proposer la bonne page
 $idUtilisateur=$_SESSION['idUtilisateur'];
 ?>
 

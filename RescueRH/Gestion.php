@@ -3,11 +3,14 @@ session_start();
 require_once('include/head.php');
 include("include/fonctions.php");
 $pageTitle = "Gestion";
+// On sélectionne l'année en cours, et les heures prevues pour cette annee
 $annee = date('Y');
 $heuresPrevues = openDb()->prepare('select * from heuresprevues where annee=?');
 $heuresPrevues->execute(array($annee));
+// on sélectionne les jours non travailles de cette annee
 $joursnontravailles = openDb()->prepare('select * from joursnontravailles where year(dateArret)=?');
 $joursnontravailles->execute(array($annee));
+// on sélectionne les événements de cette annee
 $evenements = openDb()->prepare('select * from evenement where year(dateEvenement)=?');
 $evenements->execute(array($annee));
 require_once('include/navbar.php');

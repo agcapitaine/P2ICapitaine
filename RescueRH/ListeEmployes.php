@@ -3,6 +3,7 @@ session_start();
 require_once('include/head.php');
 include("include/fonctions.php");
 $pageTitle = "Liste employés";
+// on récupère les utilisateurs
 $employes = openDB()->query('select * from utilisateur order by idUtilisateur desc');
 require_once('include/navbar.php');
 ?> 
@@ -21,6 +22,7 @@ require_once('include/navbar.php');
 <section style="background-color: #eee;">
         <div class="container py-5">
             <?php foreach ($employes as $employe) { 
+                // on n'affiche que ceux qui ne sont pas administrateur
                 if ($employe['statut']!= 'administrateur') {?>
                 <div class="row justify-content-center mb-3">
                     <div class="col-md-12 col-xl-10">

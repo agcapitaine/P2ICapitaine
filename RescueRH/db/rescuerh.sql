@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 27 mars 2024 à 22:16
+-- Généré le : ven. 05 avr. 2024 à 09:50
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -71,7 +71,11 @@ CREATE TABLE `congeemploye` (
 
 INSERT INTO `congeemploye` (`idCongeEmploye`, `idUtilisateur`, `titreConge`, `dateConge`) VALUES
 (1, 1, 'Vacances salarie', '2024-03-04'),
-(2, 1, 'Vacances salarie', '2024-02-14');
+(2, 1, 'Vacances salarie', '2024-02-14'),
+(3, 1, 'Vacances salarie', '2024-03-27'),
+(4, 1, 'Vacances salarie', '2024-03-27'),
+(5, 1, 'Vacances salarie', '2024-03-29'),
+(6, 1, 'Vacances salarie', '2024-04-10');
 
 -- --------------------------------------------------------
 
@@ -225,7 +229,7 @@ ALTER TABLE `conge`
 -- AUTO_INCREMENT pour la table `congeemploye`
 --
 ALTER TABLE `congeemploye`
-  MODIFY `idCongeEmploye` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idCongeEmploye` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `evenement`

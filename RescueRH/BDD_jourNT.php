@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("include/fonctions.php");
-$pageTitle = "Vérification ajout congé";
+$pageTitle = "Vérification ajout jours non travailles";
 require_once('include/head.php');
 $BDD = openDB();
 $reussi = false;
@@ -17,7 +17,7 @@ require_once('include/navbar.php');
         //on vérifie les saisies utilisateurs avec la fonction escape avant de les enregistrer dans des variables
         $date = escape($_POST['date']);
 
-        //on insère les données dans la table membre
+        //on insère les données dans la table joursnontravailles
         $req = "INSERT INTO joursnontravailles (dateArret) VALUES (?)";
         $reponse = openDB()->prepare($req);
         $reponse->execute(array($date));
@@ -26,7 +26,7 @@ require_once('include/navbar.php');
 
     }
     
-    //si l'insertion a eu lieu on informe l'utilisateur que le compte a bien été crée
+    //si l'insertion a eu lieu on informe l'utilisateur que c'est bon
     if ($reussi == true) {
         ?>
         <main role="main">

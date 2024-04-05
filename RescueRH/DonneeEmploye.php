@@ -89,7 +89,7 @@ $heureParAnnee = sprintf("%d heures, %d minutes, %d secondes", $heuresAnnee, $mi
 
 
 
-//compte le nombre de conges auxquels l'employé a droit
+//récupère les conges auxquels l'employé a droit
 $statutEmploye = $employe['statut'];
 $congesDroit = openDb()->prepare('select * from conge where statutConcerne=?');
 $congesDroit->execute(array($statutEmploye));

@@ -1,5 +1,6 @@
 <?php
 session_start();
+$pageTitle = "Accueil";
 require_once('include/head.php');
 ?>
 
